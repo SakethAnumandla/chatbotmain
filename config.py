@@ -2,7 +2,7 @@
 Configuration Management
 Centralized configuration using Pydantic Settings for type safety and validation
 """
-from pydantic import Field
+from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -44,6 +44,7 @@ class Settings(BaseSettings):
     )
     app_port: int = Field(
         default=5000,
+        validation_alias=AliasChoices("APP_PORT", "PORT"),
         description="Application port"
     )
     app_secret_key: str = Field(
